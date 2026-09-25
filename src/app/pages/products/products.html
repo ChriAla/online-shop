@@ -1,0 +1,26 @@
+<h1>Products</h1>
+
+<input
+  #searchInput
+  type="text"
+  placeholder="Search products..."
+  [(ngModel)]="searchText"
+  (input)="onSearch()"
+/>
+
+<button (click)="focusSearch()">Focus Search</button>
+
+<div class="products-container">
+  <div class="products-grid">
+    @for (product of filteredProducts; track product.id) {
+      <app-product-card [product]="product">
+        <p #featuredText>🔥 Featured Product</p>
+      </app-product-card>
+    }
+  </div>
+  <p>{{ message }}</p>
+
+  <button (click)="changeMessage()">
+    Change Message
+  </button>
+</div>

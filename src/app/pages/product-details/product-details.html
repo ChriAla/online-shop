@@ -1,0 +1,13 @@
+@if (product) {
+  <div>
+    <img [src]="product.image" [alt]="product.name" />
+
+    <h1>{{ product.name }}</h1>
+
+    <p>Price: {{ product.price | currency: 'EUR' }}</p>
+
+    <p>{{ product.description }}</p>
+
+    <button (click)="addToCart()">Add to Cart</button>
+  </div>
+}

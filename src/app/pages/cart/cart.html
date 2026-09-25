@@ -1,0 +1,25 @@
+<h1>Shopping Cart</h1>
+
+<div class="cart-container">
+  @for (item of cartItems; track item.product.id) {
+    <div class="cart-item">
+      <img [src]="item.product.image" [alt]="item.product.name" />
+
+      <div class="cart-item-info">
+        <h2>{{ item.product.name }}</h2>
+
+        <p>Price: {{ item.product.price * item.quantity | currency: 'EUR' }}</p>
+
+        <div class="quantity-controls">
+          <button (click)="decreaseQuantity(item.product)">−</button>
+
+          <span>{{ item.quantity }}</span>
+
+          <button (click)="increaseQuantity(item.product)">+</button>
+        </div>
+
+        <button class="remove-button" (click)="removeFromCart(item.product)">Remove</button>
+      </div>
+    </div>
+  }
+</div>
