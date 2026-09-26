@@ -2,13 +2,8 @@
   <img [src]="product().image" [alt]="product().name" />
   <h2>{{ product().name }}</h2>
   <p>Price: {{ product().price | currency: 'EUR' }}</p>
-  <p>{{ product().description }}</p>
-
-  <ng-content></ng-content>
 
   <button (click)="addToCart()">Add to Cart</button>
 
-  <button (click)="showFeaturedText()">Show Featured Text</button>
-  
   <a [routerLink]="['/products', product().id]"> View Details </a>
 </div>

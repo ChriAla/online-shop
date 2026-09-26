@@ -62,3 +62,16 @@ h1 {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.cart-total {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: right;
+  border-top: 2px solid #ddd;
+}
+
+.cart-total h2 {
+  margin: 0;
+  font-size: 24px;
+}

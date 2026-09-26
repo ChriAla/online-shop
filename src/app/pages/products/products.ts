@@ -12,8 +12,8 @@ import { Subject, debounceTime } from 'rxjs';
   styleUrl: './products.css',
 })
 export class Products implements OnInit {
-  products!: Product[];
-  filteredProducts!: Product[];
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
   searchText = '';
   message = 'first message';
 
@@ -31,20 +31,24 @@ export class Products implements OnInit {
   }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+        this.filteredProducts = products;
+
+        this.cdr.markForCheck();
+      },
+
+      error: (error) => {
+        console.error('API ERROR:', error);
+      },
+    });
 
     this.searchSubject.pipe(debounceTime(300)).subscribe((searchText) => {
       this.filteredProducts = this.products.filter((product) =>
         product.name.toLowerCase().includes(searchText.toLowerCase()),
       );
     });
-  }
-
-  changeMessage() {
-    this.message = 'the message has changed';
-
-    this.cdr.detectChanges();
   }
 
   focusSearch() {

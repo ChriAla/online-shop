@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
@@ -18,13 +18,21 @@ export class ProductDetails {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.productId = this.route.snapshot.paramMap.get('id');
 
-    this.product = this.productService
-      .getProducts()
-      .find((product) => product.id === Number(this.productId));
+    this.productService.getProducts().subscribe((products) => {
+      console.log('Products:', products);
+      console.log('URL ID:', this.productId);
+
+      this.product = products.find((product) => product.id === Number(this.productId));
+
+      this.cdr.markForCheck();
+
+      console.log('Found product:', this.product);
+    });
   }
   addToCart() {
     if (this.product) {

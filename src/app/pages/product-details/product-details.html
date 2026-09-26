@@ -1,13 +1,25 @@
 @if (product) {
-  <div>
-    <img [src]="product.image" [alt]="product.name" />
+  <div class="details-container">
+    <img
+      class="details-image"
+      [src]="product.image"
+      [alt]="product.name"
+    />
 
-    <h1>{{ product.name }}</h1>
+    <div class="details-info">
+      <h1>{{ product.name }}</h1>
 
-    <p>Price: {{ product.price | currency: 'EUR' }}</p>
+      <p class="price">
+        {{ product.price | currency: 'EUR' }}
+      </p>
 
-    <p>{{ product.description }}</p>
+      <p class="description">
+        {{ product.description }}
+      </p>
 
-    <button (click)="addToCart()">Add to Cart</button>
+      <button (click)="addToCart()">
+        Add to Cart
+      </button>
+    </div>
   </div>
 }

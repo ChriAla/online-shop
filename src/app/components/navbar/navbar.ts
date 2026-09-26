@@ -16,10 +16,10 @@ export class Navbar {
     private cartService: CartService,
     private cdr: ChangeDetectorRef,
   ) {
-    this.cartService.getCartUpdates().subscribe(cart => {
+    this.cartService.getCartUpdates().subscribe((cart) => {
       this.cartItems = cart;
-      this.cdr.detectChanges();
-    })
+      this.cdr.markForCheck();
+    });
   }
 
   get cartCount(): number {

@@ -30,6 +30,7 @@ export class CartService {
 
     if (item) {
       item.quantity++;
+      this.cartSubject.next(this.cart);
     }
   }
 
@@ -45,6 +46,8 @@ export class CartService {
 
       if (item.quantity === 0) {
         this.removeFromCart(product);
+      } else {
+        this.cartSubject.next(this.cart);
       }
     }
   }
@@ -55,5 +58,6 @@ export class CartService {
 
   removeFromCart(product: Product): void {
     this.cart = this.cart.filter((item) => item.product.id !== product.id);
+    this.cartSubject.next(this.cart);
   }
 }
